@@ -1,0 +1,66 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+  <div class="row">
+		<div class="box-element">
+			<img id="featured" src="{{ product.imageURL }}">
+
+			<div id="slide-wrapper">
+				<img id="slideLeft" class="arrow" src="{% static 'images/arrow-left.png' %}">
+
+				<div id="slider">
+					{% for image in product.image_set.all%}
+					<img class="thumbnail2" src="{{ image.imageURL }}">
+					{% endfor %}
+				</div>
+
+				<img id="slideRight" class="arrow" src="{% static 'images/arrow-right.png' %}">
+			</div>
+		</div>
+
+		<div class="column">
+			<h1>{{product.name}}</h1>
+			<hr>
+			<h3>£{{product.price}}</h3>
+
+			<p>{{product.description}}</p>
+
+			<input value=1 type="number" data-product={{item.product.id}} data-action="add" >
+			<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+			let thumbnails = document.getElementsByClassName('thumbnail2')
+			let activeImages = document.getElementsByClassName('active')
+			for (var i=0; i < thumbnails.length; i++){
+				thumbnails[i].addEventListener('mouseover', function(){
+
+					if (activeImages.length > 0){
+						activeImages[0].classList.remove('active')
+					}
+
+					this.classList.add('active')
+					document.getElementById('featured').src = this.src
+				})
+
+
+			}
+
+			const buttonRight = document.getElementById('slideRight');
+			const buttonLeft = document.getElementById('slideLeft');
+
+
+			buttonRight.addEventListener('click', function(){
+				document.getElementById('slider').scrollLeft += 180;
+		    })
+
+
+
+		    buttonLeft.addEventListener('click', function(){
+		      document.getElementById('slider').scrollLeft -= 180;
+		    })
+
+	</script>
+
+{% endblock content %}
