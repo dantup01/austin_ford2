@@ -1,6 +1,17 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+  <main class="-fullWidth">
+    <div>
+      <style type="text/css">
+        @media screen {
+          height:75vh;
+          width:100%
+        }
+      </style>
+        <img src="static/images/swing3.jpg" width=100%>
+    </div>
+  </main>
   <div class="row">
     {% for product in products %}
     <div class="col-lg-4">
